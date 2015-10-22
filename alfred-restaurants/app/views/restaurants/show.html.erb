@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @restaurant.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @restaurant.description %>
+</p>
+
+<p>
+  <strong>Quality:</strong>
+  <%= @restaurant.quality %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @restaurant.price %>
+</p>
+
+<p>
+  <strong>Environment:</strong>
+  <%= @restaurant.environment %>
+</p>
+
+<p>
+  <strong>Overall:</strong>
+  <%= @restaurant.overall %>
+</p>
+
+<%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
+<%= link_to 'Back', restaurants_path %>
