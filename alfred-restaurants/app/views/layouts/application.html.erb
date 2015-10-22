@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AlfredRestaurants</title>
+  <title>Alfred Restaurants</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-	<% flash.each do |name, msg| %>
-		<%= content_tag(:div, msg, class: "ui info message") %>
-	<%  end %>
+	<%= render 'layouts/header' %>
 
-	<%= yield %>
+	<section class="ui container">
+		<% flash.each do |name, msg| %>
+			<%= content_tag(:div, msg, class: "ui info message") %>
+		<%  end %>
+
+
+		<%= yield %>
+	</section>
 
 </body>
 </html>

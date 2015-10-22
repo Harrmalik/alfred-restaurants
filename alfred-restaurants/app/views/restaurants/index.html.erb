@@ -1,38 +1,36 @@
-<p id="notice"><%= notice %></p>
+<% if !user_signed_in? %>
+  <article class="ui segment stacked">
+    <h1>Restaurants for the town of alfred</h1>
+    <p>iunbvuqnviuebnvinreuebvuibivvvvvvvvvvvvvvvviubiibiubui</p>
+    <p><%= link_to 'SIgn up to write a review', new_user_registration_path, class: "ui blue button" %></p>
+  </article>
+<% end %>
 
-<h1>Listing Restaurants</h1>
+<h1 class="ui blue header">Listing Restaurants</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Quality</th>
-      <th>Price</th>
-      <th>Environment</th>
-      <th>Overall</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<article class="ui link cards">
+  <% @restaurants.each do |restaurant| %>
+    <div class="card">
+      <div class="image">
+        <%= link_to (image_tag restaurant.image.url(:medium), class: 'ui image'), restaurant %>
+      </div>
+      <div class="content">
+        <div class="header"><%= restaurant.name %></div>
+        <div class="description">
+          <%= restaurant.description %>
+        </div>
+      </div>
+      <div class="extra content">
+        <span class="right floated">
+          Joined in 2013
+        </span>
+        <span>
+          <i class="user icon"></i>
+          75 Friends
+        </span>
+      </div>
+    </div>
+  <% end %>
+</article>
 
-  <tbody>
-    <% @restaurants.each do |restaurant| %>
-      <tr>
-        <td><%= image_tag restaurant.image.url(:thumb) %></td>
-        <td><%= restaurant.name %></td>
-        <td><%= restaurant.description %></td>
-        <td><%= restaurant.quality %></td>
-        <td><%= restaurant.price %></td>
-        <td><%= restaurant.environment %></td>
-        <td><%= restaurant.overall %></td>
-        <td><%= link_to 'Show', restaurant %></td>
-        <td><%= link_to 'Edit', edit_restaurant_path(restaurant) %></td>
-        <td><%= link_to 'Destroy', restaurant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Restaurant', new_restaurant_path %>
+<p><%= link_to 'New Restaurant', new_restaurant_path, class: "ui blue button" %></p>

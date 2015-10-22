@@ -15,3 +15,5 @@
 /log/*
 !/log/.keep
 /tmp
+
+alfred-restaurants/public/system/restaurants/images/
