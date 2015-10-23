@@ -10,7 +10,7 @@
 
 	<%= render 'layouts/header' %>
 
-	<section class="ui container">
+	<section class="ui container segment">
 		<% flash.each do |name, msg| %>
 			<%= content_tag(:div, msg, class: "ui info message") %>
 		<%  end %>

@@ -1,121 +1,88 @@
-<section class="ui grid segment">
-  <article class="four wide column">
-    <%= image_tag @restaurant.image.url(:medium) %>
-    <p>
-      <strong>Name:</strong>
-      <%= @restaurant.name %>
-    </p>
+<section class="ui grid">
+  <article class="six wide column">
+    <%= image_tag @restaurant.image.url(:medium), class: "ui image" %>
+
+      <h2 class="ui header"><%= @restaurant.name %>
+        <span class="ui sub header">
+    <%= "#{@reviews.length} reviews" %></span>
+      </h2>
 
     <p>
       <strong>Description:</strong>
       <%= @restaurant.description %>
     </p>
 
-    <p>
-      <strong>Quality:</strong>
-      <%= @restaurant.quality %>
-    </p>
+    <div class="ui blue progress active" data-percent="<%= (@avg_quality * 2) * 10 %> ">
+        <div class="label">Quality</div>   
+        <div class="bar" style="transition-duration: 300ms; width: <%= (@avg_quality * 2) * 10 %>%;"></div>
+    </div>
 
-    <p>
-      <strong>Price:</strong>
-      <%= @restaurant.price %>
-    </p>
+    <div class="ui pink progress active" data-percent="<%= (@avg_price * 2) * 10 %> ">
+        <div class="label">Price</div>     
+        <div class="bar" style="transition-duration: 300ms; width: <%= (@avg_price * 2) * 10 %>%;"></div>
+    </div>
 
-    <p>
-      <strong>Environment:</strong>
-      <%= @restaurant.environment %>
-    </p>
-
-    <p>
-      <strong>Overall:</strong>
-      <%= @restaurant.overall %>
-    </p>
-
+    <div class="ui green progress active" data-percent="<%= (@avg_environment * 2) * 10 %> ">
+        <div class="label">Environment</div>
+        <div class="bar" style="transition-duration: 300ms; width: <%= (@avg_environment * 2) * 10 %>%;"></div>
+    </div>
+    
+    <%= link_to 'Write a Review', new_restaurant_review_path(@restaurant), class: "ui blue button" %>
     <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
     <%= link_to 'Back', restaurants_path %>
   </article>
 
   <article class="ten wide column">
     <div class="ui comments">
-      <h3 class="ui dividing header">Comments</h3>
-      <div class="comment">
-        <a class="avatar">
-          <img src="/images/avatar/small/matt.jpg">
-        </a>
-        <div class="content">
-          <a class="author">Matt</a>
-          <div class="metadata">
-            <span class="date">Today at 5:42PM</span>
-          </div>
-          <div class="text">
-            How artistic!
-          </div>
-          <div class="actions">
-            <a class="reply">Reply</a>
-          </div>
-        </div>
-      </div>
-      <div class="comment">
-        <a class="avatar">
-          <img src="/images/avatar/small/elliot.jpg">
-        </a>
-        <div class="content">
-          <a class="author">Elliot Fu</a>
-          <div class="metadata">
-            <span class="date">Yesterday at 12:30AM</span>
-          </div>
-          <div class="text">
-            <p>This has been very useful for my research. Thanks as well!</p>
-          </div>
-          <div class="actions">
-            <a class="reply">Reply</a>
-          </div>
-        </div>
-        <div class="comments">
-          <div class="comment">
-            <a class="avatar">
-              <img src="/images/avatar/small/jenny.jpg">
-            </a>
-            <div class="content">
-              <a class="author">Jenny Hess</a>
-              <div class="metadata">
-                <span class="date">Just now</span>
+      <% if @reviews.blank? %>
+        <h3 class="ui header">
+          No reviews Yet.
+        </h3>
+        <%= link_to 'Be the first', new_restaurant_review_path(@restaurant), class: "ui blue button" %>
+      <% else %>
+
+        <h3 class="ui dividing header">Comments</h3>
+        <article class="ui grid">
+          <% @reviews.each do |review| %>
+          <div class="row">
+
+            <div class="comment eight wide column">
+              <div class="content">
+                <a class="author"><%= review.user.email %></a>
+                <div class="metadata">
+                  <span class="date"><%= review.created_at %></span>
+                </div>
+                <div class="text">
+                  <%= review.comment %>
+                </div>
+                <div class="actions">
+                  
+                </div>
               </div>
-              <div class="text">
-                Elliot you are always so right :)
+            </div>     
+   
+            <div class="eight wide column">
+              <div class="ui blue progress tiny" data-percent="<%= (review.quality * 2) * 10 %> ">
+                  <div class="label">Quality</div>   
+                  <div class="bar" style="transition-duration: 300ms; width: <%= (review.quality * 2) * 10 %>%;"></div>
               </div>
-              <div class="actions">
-                <a class="reply">Reply</a>
+
+              <div class="ui pink progress tiny" data-percent="<%= (review.price * 2) * 10 %> ">
+                  <div class="label">Price</div>     
+                  <div class="bar" style="transition-duration: 300ms; width: <%= (review.price * 2) * 10 %>%;"></div>
+              </div>
+
+              <div class="ui green progress tiny" data-percent="<%= (review.environment * 2) * 10 %> ">
+                  <div class="label">Environment</div>
+                  <div class="bar" style="transition-duration: 300ms; width: <%= (review.environment * 2) * 10 %>%;"></div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="comment">
-        <a class="avatar">
-          <img src="/images/avatar/small/joe.jpg">
-        </a>
-        <div class="content">
-          <a class="author">Joe Henderson</a>
-          <div class="metadata">
-            <span class="date">5 days ago</span>
-          </div>
-          <div class="text">
-            Dude, this is awesome. Thanks so much
-          </div>
-          <div class="actions">
-            <a class="reply">Reply</a>
-          </div>
-        </div>
-      </div>
-      <form class="ui reply form">
-        <div class="field">
-          <textarea></textarea>
-        </div>
-        <div class="ui blue labeled submit icon button">
-          <i class="icon edit"></i> Add Reply
-        </div>
-      </form>
+
+          </div>   <!-- END OF ROW -->
+          <div class="ui divider"></div>
+          <% end %>
+        </article>
+      <% end %>
     </div>
   </article>
 </section>

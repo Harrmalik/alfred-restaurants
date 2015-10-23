@@ -7,6 +7,17 @@ class RestaurantsController < ApplicationController
   end
 
   def show
+    @reviews = Review.where(restaurant_id: @restaurant.id).order("created_at DESC")
+    if @reviews.blank?
+      @avg_overall = 0
+      @avg_quality = 0
+      @avg_price = 0
+      @avg_environment= 0
+    else
+      @avg_quality = @reviews.average(:quality).round(2)
+      @avg_price = @reviews.average(:price).round(2)
+      @avg_environment= @reviews.average(:environment).round(2)
+    end
   end
 
   def new
