@@ -1,36 +1,27 @@
 <% if !user_signed_in? %>
   <article class="ui segment stacked">
     <h1>Restaurants for the town of alfred</h1>
-    <p>iunbvuqnviuebnvinreuebvuibivvvvvvvvvvvvvvvviubiibiubui</p>
+    <p>View the dining options of alfred</p>
     <p><%= link_to 'SIgn up to write a review', new_user_registration_path, class: "ui blue button" %></p>
   </article>
 <% end %>
 
 <h1 class="ui blue header">Listing Restaurants</h1>
 
-<article class="ui link cards">
+<article class="ui link cards container">
   <% @restaurants.each do |restaurant| %>
     <div class="card">
       <div class="image">
         <%= link_to (image_tag restaurant.image.url(:medium), class: 'ui image'), restaurant %>
       </div>
       <div class="content">
-        <div class="header"><%= restaurant.name %></div>
+        <div class="header"><%= link_to restaurant.name, restaurant %></div>
         <div class="description">
           <%= restaurant.description %>
         </div>
       </div>
-      <div class="extra content">
-        <span class="right floated">
-          Joined in 2013
-        </span>
-        <span>
-          <i class="user icon"></i>
-          75 Friends
-        </span>
-      </div>
     </div>
   <% end %>
 </article>
-
+<br>
 <p><%= link_to 'New Restaurant', new_restaurant_path, class: "ui blue button" %></p>

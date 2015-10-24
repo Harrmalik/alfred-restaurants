@@ -31,12 +31,12 @@ ActiveRecord::Schema.define(version: 20151023003508) do
 
   create_table "reviews", force: :cascade do |t|
     t.text     "comment"
-    t.integer  "quality"
-    t.integer  "price"
-    t.integer  "environment"
-    t.integer  "rating"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "quality",       default: 0
+    t.integer  "price",         default: 0
+    t.integer  "environment",   default: 0
+    t.integer  "rating",        default: 0
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.integer  "user_id"
     t.integer  "restaurant_id"
   end

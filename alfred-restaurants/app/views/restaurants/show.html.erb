@@ -1,4 +1,4 @@
-<section class="ui grid">
+<section class="ui grid stackable">
   <article class="six wide column">
     <%= image_tag @restaurant.image.url(:medium), class: "ui image" %>
 
@@ -12,24 +12,30 @@
       <%= @restaurant.description %>
     </p>
 
-    <div class="ui blue progress active" data-percent="<%= (@avg_quality * 2) * 10 %> ">
+    <div class="ui blue progress active" data-percent="<%= (@avg_quality * 20) %> ">
         <div class="label">Quality</div>   
-        <div class="bar" style="transition-duration: 300ms; width: <%= (@avg_quality * 2) * 10 %>%;"></div>
+        <div class="bar" style="transition-duration: 300ms; width: <%= (@avg_quality * 20) %>%;">      
+        <div class="progress"><%= @avg_quality %>/5</div>
+        </div>
     </div>
 
-    <div class="ui pink progress active" data-percent="<%= (@avg_price * 2) * 10 %> ">
+    <div class="ui pink progress active" data-percent="<%= (@avg_price * 20) %> ">
         <div class="label">Price</div>     
-        <div class="bar" style="transition-duration: 300ms; width: <%= (@avg_price * 2) * 10 %>%;"></div>
+        <div class="bar" style="transition-duration: 300ms; width: <%= (@avg_price * 20) %>%;">       
+        <div class="progress"><%= @avg_price %>/ 5</div>
+        </div>
     </div>
 
-    <div class="ui green progress active" data-percent="<%= (@avg_environment * 2) * 10 %> ">
+    <div class="ui green progress active" data-percent="<%= (@avg_environment * 20) %> ">
         <div class="label">Environment</div>
-        <div class="bar" style="transition-duration: 300ms; width: <%= (@avg_environment * 2) * 10 %>%;"></div>
+        <div class="bar" style="transition-duration: 300ms; width: <%= (@avg_environment * 20) %>%;">      
+        <div class="progress"><%= @avg_environment %>/ 5</div>
+        </div>
     </div>
     
     <%= link_to 'Write a Review', new_restaurant_review_path(@restaurant), class: "ui blue button" %>
-    <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
-    <%= link_to 'Back', restaurants_path %>
+    <%= link_to 'Edit', edit_restaurant_path(@restaurant), :class => "ui button" %> |
+    <%= link_to 'Back', restaurants_path, :class => "ui button" %>
   </article>
 
   <article class="ten wide column">
@@ -62,17 +68,17 @@
             </div>     
    
             <div class="eight wide column">
-              <div class="ui blue progress tiny" data-percent="<%= (review.quality * 2) * 10 %> ">
+              <div class="ui blue progress tiny" data-percent="<%= (review.quality * 20) %> ">
                   <div class="label">Quality</div>   
-                  <div class="bar" style="transition-duration: 300ms; width: <%= (review.quality * 2) * 10 %>%;"></div>
+                  <div class="bar" style="transition-duration: 300ms; width: <%= (review.quality * 20) %>%;"></div>
               </div>
 
-              <div class="ui pink progress tiny" data-percent="<%= (review.price * 2) * 10 %> ">
+              <div class="ui pink progress tiny" data-percent="<%= (review.price * 20) %> ">
                   <div class="label">Price</div>     
-                  <div class="bar" style="transition-duration: 300ms; width: <%= (review.price * 2) * 10 %>%;"></div>
+                  <div class="bar" style="transition-duration: 300ms; width: <%= (review.price  * 20) %>%;"></div>
               </div>
 
-              <div class="ui green progress tiny" data-percent="<%= (review.environment * 2) * 10 %> ">
+              <div class="ui green progress tiny" data-percent="<%= (review.environment * 20) %> ">
                   <div class="label">Environment</div>
                   <div class="bar" style="transition-duration: 300ms; width: <%= (review.environment * 2) * 10 %>%;"></div>
               </div>
