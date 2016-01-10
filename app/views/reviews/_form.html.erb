@@ -1,0 +1,31 @@
+<%= form_for([ @restaurant, @review], :html => {:class => "ui form"}) do |f| %>
+  <% if @review.errors.any? %>
+    <div id="error_explanation ui message">
+      <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+
+      <ul>
+      <% @review.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="two fields">
+    <div class="field">   
+      <%= f.label :comment %><br>
+      <%= f.text_area :comment %>
+    </div>
+
+    <div class="field">
+      <%= f.label :quality %><br>
+      <%= f.number_field :quality, :min => 0, :max => 5 %>
+      <%= f.label :price %><br>
+      <%= f.number_field :price, :min => 0, :max => 5 %>
+      <%= f.label :environment %><br>
+      <%= f.number_field :environment, :min => 0, :max => 5 %>
+    </div>
+  </div>
+
+  <input class="ui button" type="submit" name="commit" value="Create Review" />
+<% end %>

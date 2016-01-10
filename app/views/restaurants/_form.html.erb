@@ -1,0 +1,27 @@
+<%= form_for @restaurant, html: { multipart: true, class: "ui form" } do |f| %>
+  <% if @restaurant.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@restaurant.errors.count, "error") %> prohibited this restaurant from being saved:</h2>
+
+      <ul>
+      <% @restaurant.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="ui field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="ui field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="ui field">
+    <%= f.label :image %><br>
+    <%= f.file_field :image %>
+  </div>
+  <input class="ui button" type="submit" name="commit" value="Update Restaurant" />
+<% end %>

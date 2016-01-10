@@ -1,0 +1,94 @@
+<section class="ui grid stackable">
+  <article class="six wide column">
+    <%= image_tag @restaurant.image.url(:medium), class: "ui image" %>
+
+      <h2 class="ui header"><%= @restaurant.name %>
+        <span class="ui sub header">
+    <%= "#{@reviews.length} reviews" %></span>
+      </h2>
+
+    <p>
+      <strong>Description:</strong>
+      <%= @restaurant.description %>
+    </p>
+
+    <div class="ui blue progress active" data-percent="<%= (@avg_quality * 20) %> ">
+        <div class="label">Quality</div>   
+        <div class="bar" style="transition-duration: 300ms; width: <%= (@avg_quality * 20) %>%;">      
+        <div class="progress"><%= @avg_quality %>/5</div>
+        </div>
+    </div>
+
+    <div class="ui pink progress active" data-percent="<%= (@avg_price * 20) %> ">
+        <div class="label">Price</div>     
+        <div class="bar" style="transition-duration: 300ms; width: <%= (@avg_price * 20) %>%;">       
+        <div class="progress"><%= @avg_price %>/ 5</div>
+        </div>
+    </div>
+
+    <div class="ui green progress active" data-percent="<%= (@avg_environment * 20) %> ">
+        <div class="label">Environment</div>
+        <div class="bar" style="transition-duration: 300ms; width: <%= (@avg_environment * 20) %>%;">      
+        <div class="progress"><%= @avg_environment %>/ 5</div>
+        </div>
+    </div>
+    
+    <%= link_to 'Write a Review', new_restaurant_review_path(@restaurant), class: "ui blue button" %>
+    <%= link_to 'Edit', edit_restaurant_path(@restaurant), :class => "ui button" %> |
+    <%= link_to 'Back', restaurants_path, :class => "ui button" %>
+  </article>
+
+  <article class="ten wide column">
+    <div class="ui comments">
+      <% if @reviews.blank? %>
+        <h3 class="ui header">
+          No reviews Yet.
+        </h3>
+        <%= link_to 'Be the first', new_restaurant_review_path(@restaurant), class: "ui blue button" %>
+      <% else %>
+
+        <h3 class="ui dividing header">Comments</h3>
+        <article class="ui grid">
+          <% @reviews.each do |review| %>
+          <div class="row">
+
+            <div class="comment eight wide column">
+              <div class="content">
+                <a class="author"><%= review.user.email %></a>
+                <div class="metadata">
+                  <span class="date"><%= review.created_at %></span>
+                </div>
+                <div class="text">
+                  <%= review.comment %>
+                </div>
+                <div class="actions">
+                  
+                </div>
+              </div>
+            </div>     
+   
+            <div class="eight wide column">
+              <div class="ui blue progress tiny" data-percent="<%= (review.quality * 20) %> ">
+                  <div class="label">Quality</div>   
+                  <div class="bar" style="transition-duration: 300ms; width: <%= (review.quality * 20) %>%;"></div>
+              </div>
+
+              <div class="ui pink progress tiny" data-percent="<%= (review.price * 20) %> ">
+                  <div class="label">Price</div>     
+                  <div class="bar" style="transition-duration: 300ms; width: <%= (review.price  * 20) %>%;"></div>
+              </div>
+
+              <div class="ui green progress tiny" data-percent="<%= (review.environment * 20) %> ">
+                  <div class="label">Environment</div>
+                  <div class="bar" style="transition-duration: 300ms; width: <%= (review.environment * 2) * 10 %>%;"></div>
+              </div>
+            </div>
+
+          </div>   <!-- END OF ROW -->
+          <div class="ui divider"></div>
+          <% end %>
+        </article>
+      <% end %>
+    </div>
+  </article>
+</section>
